@@ -1,0 +1,285 @@
+/* Core Layout & Background */
+/*  
+html, body {
+    height: 100%;
+    margin: 10;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #d0f0ff, #f5efd3, #f3e1f5);
+    background-attachment: fixed;
+    background-size: cover;
+    overflow-x: hidden;
+    color: #333;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; 
+  overflow-y: auto;  
+  scroll-behavior: smooth;
+}*/
+
+/* Floating Emoji Background */
+/*body::before {
+    content: "💬 🔍 😊 🤖 📊 ❤️";
+    font-size: 5rem;
+    opacity: 0.05;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    z-index: 0;
+    animation: float 20s infinite linear;
+    white-space: nowrap;
+ } */
+
+/* Core Layout & Background */
+html, body {
+  margin: 10px;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #d0f0ff, #f5efd3, #f3e1f5);
+  background-attachment: fixed;
+  background-size: cover;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Make the page scroll smoothly and fully centered */
+body {
+  display: block;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Floating Emoji Background */
+body::before {
+  content: "💬 🔍 😊 🤖 📊 ❤️";
+  font-size: 5rem;
+  opacity: 0.05;
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  z-index: 0;
+  animation: float 20s infinite linear;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+
+
+/* Animations */
+@keyframes float {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+h1 {
+    margin-top: 40px;
+    font-size: 2.8em;
+    text-align: center;
+    color: #16325c;
+    text-shadow: 1px 1px 2px #a7dff5;
+    z-index: 1;
+    animation: fadeIn 1s ease-out;
+}
+
+
+
+/* Card Container */
+form {
+    background: rgba(231, 182, 182, 0.65);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 30px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    animation: fadeIn 1.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    height: 140px;
+    padding: 15px;
+    font-size: 1.1em;
+    border: 2px solid #90caf9;
+    border-radius: 12px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #42a5f5;
+}
+
+
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 450px); /* subtract header space */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+
+/* Button */
+button {
+    margin-top: 18px;
+    background: linear-gradient(45deg, #42a5f5, #1e88e5);
+    color: white;
+    padding: 14px 28px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #64b5f6, #1976d2);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(33, 150, 243, 0.4);
+}
+
+/* /---------------------------------------------------------- */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.button-group button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.button-group button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.button-group .refresh-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.button-group button:hover {
+  opacity: 0.9;
+}
+
+/* -------------------------------------------------- */
+
+/* Result Box */
+.result {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(5px);
+    margin-top: 25px;
+    padding: 20px 30px;
+    border-radius: 15px;
+    text-align: center;
+    animation: fadeIn 1.5s ease;
+}
+
+.result h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.result h3::before {
+    content: "🧠 ";
+    margin-right: 8px;
+}
+
+.result h3::after {
+    content: " 🎯";
+    margin-left: 8px;
+}
+
+.result p {
+    font-size: 1.2em;
+    color: #444;
+}
+
+/* Links */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #1565c0;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #0d47a1;
+    text-shadow: 0 0 8px #bbdefb;
+}
+
+a.dashboard-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ad22ad;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a.dashboard-link:hover {
+  background-color: #5e35b1;
+  transform: scale(1.03);
+  text-decoration: none;
+}
+
+
+/* Responsive */
+@media (max-width: 600px) {
+    form {
+        padding: 20px;
+    }
+
+    textarea {
+        height: 100px;
+        font-size: 1em;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}

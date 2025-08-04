@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sentiment Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <h1>📊 Real-Time Sentiment Dashboard</h1>
+  <a href="/" class="btn">⬅️ Back to Analyzer</a>
+
+  {% if entries %}
+  <div class="latest-charts-container">
+    <div class="latest-summary">
+      <h2>🧠 Latest Sentiment:</h2>
+      <p><strong>Sentiment:</strong>{{ entries[0].label }} {{ '😊' if entries[0].label == 'POSITIVE' else '😐' if entries[0].label == 'NEUTRAL' else '😡' }}</p>
+      <p><strong>Confidence:</strong> {{ '%.2f' | format(entries[0].score ) }}%</p>
+      <p><strong>Text:</strong> "{{ entries[0].text }}"</p>
+      <p><strong>Date:</strong> <em id="latest-timestamp" data-time="{{ entries[0].timestamp }}"></em></p>
+    </div>
+
+    <div class="chart-container">
+      <h3>📉 Latest Sentiment Confidence</h3>
+      <canvas id="barChart"></canvas>
+      <button onclick="downloadChart('barChart', 'bar_chart.png')" id="download-bar" class="download-btn">⬇📊 Download Bar Chart</button>
+    </div>
+
+    <div class="chart-container">
+      <h3>📈 Sentiment Share</h3>
+      <canvas id="pieChart"></canvas>
+      <button onclick="downloadChart('pieChart', 'pie_chart.png')" id="download-pie" class="download-btn">⬇🥧 Download Pie Chart</button>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="export-buttons">
+    <a href="/export/csv" class="btn">📊 Download CSV Report</a>
+  </div>
+
+  <h2>📝 Recent Sentiment Entries</h2>
+  <table class="entry-table" id="sentimentTable">
+    <thead>
+      <tr>
+        <th>Sentiment</th>
+        <th>Score</th>
+        <th>Text</th>
+        <th>Date of Analysis</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in entries %}
+      <tr>
+        <td class="{{ entry.label | lower }}">{{ entry.label }} {{ '😊' if entry.label == 'POSITIVE' else '😐' if entry.label == 'NEUTRAL' else '😡' }}</td>
+        <td>{{ '%.2f' | format(entry.score) }}%</td>
+        <td>{{ entry.text }}</td>
+        <td class="timestamp" data-utc="{{ entry['timestamp'].isoformat() }}"></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4">No sentiment entries available.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% if entries %}
+<script>
+  const latestLabel = "{{ entries[0].label }}";
+  const latestScore = parseFloat("{{ '%.2f' | format(entries[0].score) }}");
+  const neutral = latestLabel === "NEUTRAL" ? latestScore : 0;
+  const positive = latestLabel === "POSITIVE" ? latestScore : 0;
+  const negative = latestLabel === "NEGATIVE" ? latestScore : 0;
+
+  // Bar Chart
+  new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Positive 😊', 'Neutral 😐', 'Negative 😡'],
+      datasets: [{
+        label: 'Confidence %',
+        data: [positive, neutral, negative],
+        backgroundColor: ['#58d68d', '#f8c471', '#e74c3c']
+      }]
+    },
+    options: {
+      responsive: true,
+      animation: {
+        duration: 1000,
+        easing: 'easeOutBounce'
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Confidence by Sentiment',
+          font: { size: 16 }
+        }
+      }
+    }
+  });
+
+  // Pie Chart
+  new Chart(document.getElementById('pieChart'), {
+    type: 'pie',
+    data: {
+      labels: ['Confidence %', 'Remainder'],
+      datasets: [{
+        data: [latestScore, 100 - latestScore],
+        backgroundColor: ['#5dade2', '#ecf0f1']
+      }]
+    },
+    options: {
+      responsive: true,
+      animation: {
+        duration: 1000,
+        easing: 'easeInOutCubic'
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Latest Sentiment Score Share',
+          font: { size: 16 }
+        }
+      }
+    }
+  });
+</script>
+{% endif %}
+
+<script>
+  // Convert all timestamps to just local date (no time)
+  document.addEventListener("DOMContentLoaded", function () {
+    const timestampCells = document.querySelectorAll('.timestamp');
+    timestampCells.forEach(cell => {
+      const utc = cell.dataset.utc;
+      if (utc) {
+        const localDate = new Date(utc);
+        const dateOnly = localDate.toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        cell.textContent = dateOnly;
+      }
+    });
+
+    const summaryTs = document.getElementById('latest-timestamp');
+    if (summaryTs) {
+      const timeStr = summaryTs.getAttribute('data-time');
+      if (timeStr) {
+        const dateOnly = new Date(timeStr).toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        summaryTs.textContent = dateOnly;
+      }
+    }
+  });
+
+  // Download chart as PNG
+  function downloadChart(chartId, filename) {
+    const canvas = document.getElementById(chartId);
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+</script>
+
+</body>
+</html>
+

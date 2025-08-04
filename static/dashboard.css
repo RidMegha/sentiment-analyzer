@@ -1,0 +1,240 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #eef6ff, #f5fcff);
+  color: #222;
+  margin: 20px;
+  padding: 0 5%;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 10px;
+}
+
+a.btn {
+  display: inline-block;
+  padding: 10px 18px;
+  margin: 10px 5px;
+  background: linear-gradient(to right, #3575a0, #bd5fb5);
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+a.btn:hover {
+  background: linear-gradient(to right, #d1d8dd, #f2cba7);
+  transform: scale(1.05);
+  color: rgb(10, 2, 2);
+  font-size: 1.2rem;
+}
+
+/* Latest Summary and Charts */
+.latest-charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.latest-summary {
+  background: #e6ffe6;
+  border-left: 5px solid #2ecc71;
+  padding: 10px 20px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.latest-summary p {
+  margin: 8px 0;
+  font-size: 2.2rem;
+}
+
+.latest-summary strong {
+  color: #5b3089;
+}
+
+.download-btn {
+  background: linear-gradient(to right, #5d83ac, #eef0de);
+  color: rgb(25, 21, 21);
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 10px 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn:hover {
+  background: linear-gradient(to right, #932d97, #66BB6A);
+  transform: scale(1.05);
+}
+
+
+/* Charts */
+.chart-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 1s ease;
+  text-align: center;
+}
+
+canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+/* Export Buttons */
+.export-buttons {
+  text-align: center;
+  margin: 30px 0;
+}
+
+/* Table Layout */
+.entry-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  animation: fadeInUp 1s ease;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.entry-table th, .entry-table td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.entry-table th {
+  background: linear-gradient(to right, #3498db, #2980b9);
+  color: white;
+}
+
+.entry-table tr:hover {
+  background-color: #f1f9ff;
+  transition: background 0.3s ease;
+}
+
+/* Sentiment label colors */
+.entry-table .positive {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.entry-table .neutral {
+  color: #f39c12;
+  font-weight: bold;
+}
+
+.entry-table .negative {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.small.btn {
+  font-size: 0.85em;
+  padding: 5px 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .latest-charts-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .latest-summary, .chart-container {
+    width: 90%;
+  }
+}
+
+
+
+
+
+
+
+
+/*
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 20px;
+  background: linear-gradient(to bottom right, #eaf8f8, #fff9e5);
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+a {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+a:hover {
+  background-color: #2980b9;
+}
+
+.card {
+  background: #ffffff;
+  border-left: 5px solid #3498db;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 30px 0;
+  gap: 30px;
+}
+
+canvas {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+  */

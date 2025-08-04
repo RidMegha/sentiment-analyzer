@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI-Based Sentiment Analyzer</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>🤖 AI-Based Sentiment Analyzer 🤖</h1>
+
+  <div class="center-container">
+    <!-- Input Form -->
+    <form method="POST">
+      <textarea name="text" placeholder="Type your thoughts here...">{{ text }}</textarea>
+      <br>
+      <div class="button-group">
+      <button type="submit">🧠 Analyze</button>
+      <button type="button" onclick="window.location.href='/'">🔄 Refresh</button>
+        </div>
+    </form>
+
+<!-- Result -->
+{% if sentiment %}
+<div class="result">
+  <h3>Sentiment: {{ sentiment.label }}</h3>
+  <p>Confidence: {{ sentiment.score }}%</p>
+  <p>🌍 Detected Language: <strong>{{ sentiment.language }}</strong></p>
+
+  <div class="score-bars">
+    <p><strong>Detailed Scores:</strong></p>
+    <ul style="list-style: none; padding-left: 0;">
+      {% for lbl, sc in sentiment.all_scores.items() %}
+      <li>📊 <strong>{{ lbl }}:</strong> {{ sc }}%</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <a href="/dashboard" class="dashboard-link">📈 View Sentiment Dashboard</a>
+</div>
+{% endif %}
+
+
+    <!-- Result -->
+    <!--{% if sentiment %}
+    <div class="result">
+      <h3>Sentiment: {{ sentiment.label }}</h3>
+      <p>Confidence: {{ sentiment.score }}%</p>
+
+      <div class="score-bars">
+        <p style="margin: 10px 0;"><strong>Detailed Scores:</strong></p>
+        <ul style="list-style: none; padding-left: 0;">
+          {% for lbl, sc in sentiment.all_scores.items() %}
+          <li>📊 <strong>{{ lbl }}:</strong> {{ sc }}%</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <a href="/dashboard">📈 View Sentiment Dashboard</a>
+    </div>
+    {% endif %} -->
+  </div>
+</body>
+</html>
+

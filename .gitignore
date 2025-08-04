@@ -1,0 +1,39 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# Environment variable files
+.env
+
+# Log files
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# Python package files
+*.egg-info/
+
+# Build folders (e.g., if using PyInstaller or similar)
+build/
+dist/
+*.spec
+
+# PDF and CSV exports
+*.pdf
+*.csv
+*.xlsx
+
+# WeasyPrint or other temp files
+weasyprint-*
+
+# Static or compiled JS/CSS if applicable
+static/build/
